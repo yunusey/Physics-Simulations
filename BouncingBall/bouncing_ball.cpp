@@ -24,7 +24,6 @@ struct Ball{
         if(!made)
             vel += dvec3{0, acc * dt, 0};
         pos = pos +  vel * dt;
-        std::cout << pos[1] << " " << count << std::endl;
         made = false;
     }
     void HandleCollisions(){
@@ -73,12 +72,10 @@ struct Ball{
         glGenBuffers(1, &ibo);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-        //glDrawArrays(GL_LINE_LOOP, 0, points.size() / 3); NORMAL TOP 
+         
         glDrawElements(GL_LINES, 2 * segments, GL_UNSIGNED_INT, nullptr);
         glDisableClientState(GL_COLOR_ARRAY);
         glDisableClientState(GL_VERTEX_ARRAY);
-
-
         glutSwapBuffers();
     }
 
@@ -102,7 +99,7 @@ void display(){
 
     Integrate(particles, dt);
 
-    glClearColor(0.0, 0.0, 0.0, 0.0);
+    glClearColor(0.0, 0.0, 0.4, 0.0);
     glClear(GL_COLOR_BUFFER_BIT);
 
     glMatrixMode(GL_PROJECTION);
@@ -124,7 +121,7 @@ int main(int argc, char **argv){
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH | GLUT_DOUBLE);
     glutInitWindowSize(600, 600);
-    glutCreateWindow("Ziplayan Muthis Top");
+    glutCreateWindow("Bouncing Ball!");
 
     glutDisplayFunc(display);
     glutTimerFunc(0, timer, 0);
